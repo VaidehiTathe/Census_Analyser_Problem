@@ -24,6 +24,10 @@ namespace CensusAnalyser
             {
                 throw new StateCensusAnalyserException("Give correct path");
             }
+            catch (FileNotFoundException)
+            {
+                throw new StateCensusAnalyserException("Incorrect file name");
+            }
         }
     }
 }
