@@ -5,18 +5,25 @@ using System.Text;
 
 namespace CensusAnalyser
 {
-    class CSVStateCensusAnalyser
+    public class CSVStateCensusAnalyser
     {
         public static int GetRecords(string filePath)
         {
-            int countOfRecords = 0;
-            string[] data = File.ReadAllLines(filePath);
-            IEnumerable<string> records = data;
-            foreach(var elements in records)
+            try
             {
-                countOfRecords++;
+                int countOfRecords = 0;
+                string[] data = File.ReadAllLines(filePath);
+                IEnumerable<string> records = data;
+                foreach (var elements in records)
+                {
+                    countOfRecords++;
+                }
+                return countOfRecords - 1;
             }
-            return countOfRecords - 1;
+            catch(StateCensusAnalyserException)
+            {
+                throw new StateCensusAnalyserException("Give correct path");
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CensusAnalyser
 {
-    class StateCensusAnalyser
+    public class StateCensusAnalyser
     {
         private readonly string filePath;
         public StateCensusAnalyser(string filePath)
@@ -16,8 +16,15 @@ namespace CensusAnalyser
         }
         public static int GetStateCensusRecords(string filepath)
         {
-            string[] numOfRecords = File.ReadAllLines(filepath);
-            return numOfRecords.Length - 1;
+            try
+            {
+                string[] numOfRecords = File.ReadAllLines(filepath);
+                return numOfRecords.Length - 1;
+            }
+            catch(StateCensusAnalyserException)
+            {
+                throw new StateCensusAnalyserException("Give correct path");
+            }
         }
         
     }
